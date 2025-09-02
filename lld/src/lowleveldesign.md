@@ -13,7 +13,7 @@ Uses:
 - Flexible software
 - Reduce complexity
 
-Single Responsibility principle: 
+**Single Responsibility principle:** 
 
 Class should have only one reason to change the implementation.
 
@@ -25,7 +25,7 @@ Use of single responsibility principle:
 - Easy to maintain
 - Easy to understand
 
-Open/closed principle:
+**Open/closed principle:**
 
 This principle follows the open for extension and closed for modification
 
@@ -33,7 +33,7 @@ In the invoice example, whenever there is any future implementation to save a fi
 create other class and implement the solution. So this helps the class that is already implemented doesn't go through
 modification. New class helps for extension of implementation.
 
-Liskov substitution principle:
+**Liskov substitution principle:**
 
 If class B is subtype of class A, then we should be able to replace object of A with B without breaking the behaviour 
 of the program. Subclass should extend the capability of parent class not narrow it down.
@@ -44,14 +44,14 @@ it down
 The above issue can be solved by segregating the class. Parent class/interface should have generic method which serves for all types 
 of vehicle and child classes should extend/implement the necessary methods in hierarchy.
 
-Interface segregation principle:
+**Interface segregation principle:**
 
 The class should not implement unnecessary functions that they do not need.
 
 In the Restaurant example, interfaces are segregated such that each individual has specific roles to do instead of classes implemented
 all the unwanted methods.
 
-Dependency Inversion principle:
+**Dependency Inversion principle:**
 
 Classes should depend on interfaces rather than concrete classes.
 

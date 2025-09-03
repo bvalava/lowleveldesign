@@ -57,3 +57,8 @@ Classes should depend on interfaces rather than concrete classes.
 
 In the Macbook example, I have used the interfaces so that in future if there are any different types of keyboard or mouse being used
 we can easily construct the object with different types of keyboard or mouse.
+
+**Strategy Design pattern**
+
+This design pattern comes into picture when there is existence of duplicate code in child classes. Consider a scenario, where multiple child classes need to implement a capability which is not present in parent class. In that case, this code should be implemented in multiple child classes which increases duplication.
+Strategy design pattern solves the duplication issue by implementing the generic interface and that interface will be implemented multiple classes which needs its specific capability

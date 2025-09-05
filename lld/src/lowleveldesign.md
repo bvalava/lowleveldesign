@@ -62,3 +62,6 @@ we can easily construct the object with different types of keyboard or mouse.
 
 This design pattern comes into picture when there is existence of duplicate code in child classes. Consider a scenario, where multiple child classes need to implement a capability which is not present in parent class. In that case, this code should be implemented in multiple child classes which increases duplication.
 Strategy design pattern solves the duplication issue by implementing the generic interface and that interface will be implemented multiple classes which needs its specific capability
+
+**Observer Design Pattern**
+This design pattern has two categories, observable and observer. Whenever there is a change of state in observable it will notify to all observers. For example, whenever there is a change in temperature the weather station which is observable will notify to TV's, mobiles etc. which are observers.

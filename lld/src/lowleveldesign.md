@@ -65,3 +65,6 @@ Strategy design pattern solves the duplication issue by implementing the generic
 
 **Observer Design Pattern**
 This design pattern has two categories, observable and observer. Whenever there is a change of state in observable it will notify to all observers. For example, whenever there is a change in temperature the weather station which is observable will notify to TV's, mobiles etc. which are observers.
+
+**Decorator Design pattern**
+This Design pattern is used when you want to decorate the base object. So basically, if you want to add new features on the top of already existing object decorator pattern will come into play. Example is Pizza, on pizza object you can add any number of toppings. Here toppings can be called decorators.

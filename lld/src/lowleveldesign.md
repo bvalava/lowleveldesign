@@ -68,3 +68,11 @@ This design pattern has two categories, observable and observer. Whenever there 
 
 **Decorator Design pattern**
 This Design pattern is used when you want to decorate the base object. So basically, if you want to add new features on the top of already existing object decorator pattern will come into play. Example is Pizza, on pizza object you can add any number of toppings. Here toppings can be called decorators.
+
+**Factory Design Pattern**
+This is a creational design pattern, it helps in encapsulating the object creation logic within a separate class known as factory. It avoids creation of same object in multiples classes. This pattern provides loose coupling and enhances code organization and maintainability by centralizing object instantiation. 
+
+**Abstract Factory Design Pattern**
+It is called as Factories of factory. It has one more object on top of factory object. 
+Example: You want to design a system to create cars with specific configurations for different regions, such as North America and Europe.
+         Each region may have unique requirements and regulations, and you want to ensure that cars produced for each region meet those standards.

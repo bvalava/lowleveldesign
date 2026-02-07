@@ -76,3 +76,86 @@ This is a creational design pattern, it helps in encapsulating the object creati
 It is called as Factories of factory. It has one more object on top of factory object. 
 Example: You want to design a system to create cars with specific configurations for different regions, such as North America and Europe.
          Each region may have unique requirements and regulations, and you want to ensure that cars produced for each region meet those standards.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Striver notes**
+
+**Single Responsibility Principle:** 
+A class should have only one reason to change. This means that class should have only one job, one responsibility, one purpose.
+
+Real life analogy - Restaurant (Waiters, chefs, Reception, security each have single different role)
+
+Benefits:
+ Easier to maintain
+ Improved test coverage
+ Low risk in changes
+ Reusable modules
+
+**Open Closed principle**
+Software entities(classes, modules and functions) should be open for extension but closed for modification. 
+
+This means that the behavior of a module can be extended without modifying its source code. The goal is to reduce the risk of breaking existing functionality when requirements change.
+
+Real life analogy - Adapter
+
+**Liskov Substitution principle**
+If S is a subtype of T, then objects of type T may be replaced with objects of type S without altering the correctness of the program.
+This means that any subclass should be substitutable for its parent class without breaking the functionality.
+
+Think of it like this:
+If you write code using a parent class (say Shape), and later swap in a child class (using the child class object in place of the parent class object) (like Circle), the code should still work without errors or unexpected behavior.
+If the subclass changes behavior in a way that breaks expectations, it violates LSP
+
+Example: Notification
+
+**Interface Segregation Principle**
+It says: "Don't force a class to depend on methods it does not use."
+
+Understanding
+
+Suppose you order an Uber. You're just a rider — you only care about booking rides, tracking the driver, and paying. You don't care about picking up passengers, verifying driver's licenses, or managing earnings — that's for drivers!
+But what if the app gave you one massive interface with everything — rider features and driver features? It would be confusing, right?
+
+That's exactly what ISP helps prevent in software.
+
+**Dependency Inversion principle**
+"High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions."
+
+In simpler words, Rather than high-level classes controlling and depending on the details of lower-level ones, both should rely on interfaces or abstract classes. This makes your code flexible, testable, and easier to maintain.
+
+**Association(USE-A)**
+
+Association represents a general relationship between two classes where one class uses or interacts with another. It can be: one-to-one, one-to-many or many-to-many.
+Example: A teacher can teach multiple students, and a student can be taught by multiple teachers (many-to-many association).
+UML Notation: A solid line between the two classes.
+
+**Aggregation (HAS-A)**
+
+Aggregation is a "whole-part" relationship where a class is made up of one or more classes, but those parts can exist independently.
+Example: A Department has multiple Professors. If the department is removed, the professors still exist.
+UML Notation: A hollow diamond at the container (whole) class.
+
+**Composition (Strong HAS-A)**
+
+Composition is a stronger form of aggregation where the part cannot exist without the whole. It is a "whole-part" relationship where the part is dependent on the whole.
+Example: A House has Rooms. If the House is destroyed, so are the Rooms.
+UML Notation: A filled diamond at the whole side.
+
+**Inheritance (IS-A)**
+
+Inheritance defines an IS-A relationship where a subclass inherits properties and behavior from a superclass. The subclass can extend or override the superclass's attributes and methods.
+Example: A Dog is an Animal.
+UML Notation: A solid line with a filled triangle pointing to the parent class.
+
+**Realization (Implementation)**
+
+Realization is the relationship between a class and an interface. The class agrees to implement the behavior declared by the interface.
+Example: A Circle class implements the Shape interface.
+UML Notation: A dashed line with a filled triangle pointing to the interface.
+
+**Dependency**
+
+Dependency indicates that a class uses another class temporarily. Changes to the used class may affect the dependent class.
+Example: OrderService depends on PaymentService to process payments.
+UML Notation: A dashed line with an open arrow pointing to the class being used.

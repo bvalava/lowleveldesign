@@ -194,3 +194,49 @@ Formal Definition:
 
 In simpler terms:
 Imagine you're ordering a custom burger. You choose the bun, patty, toppings, sauces, and whether you want it grilled or toasted. The chef follows your instructions step by step to build your custom burger. This is what the Builder Pattern does — it lets you construct complex objects by specifying their parts one at a time, giving you flexibility and control over the object creation process.
+
+**Abstract Factory**
+
+The Abstract Factory Pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+In simpler terms:
+You use it when you have multiple factories, each responsible for producing objects that are meant to work together.
+
+**Prototype**
+
+The Prototype Pattern is a creational design pattern used to clone existing objects instead of constructing them from scratch. It enables efficient object creation, especially when the initialization process is complex or costly.
+
+Formal Definition: 
+"Prototype pattern creates duplicate objects while keeping performance in mind. It provides a mechanism to copy the original object to a new one without making the code dependent on their classes."
+
+**Adapter**
+
+The Adapter Pattern allows incompatible interfaces to work together by acting as a translator or wrapper around an existing class. It converts the interface of a class into another interface that a client expects.
+
+It acts as a bridge between the Target interface (expected by the client) and the Adaptee (an existing class with a different interface). This structural wrapping enables integration and compatibility across diverse systems.
+
+**Decorator**
+
+The Decorator Pattern is a structural design pattern that allows behavior to be added to individual objects, dynamically at runtime, without affecting the behavior of other objects from the same class.
+
+It wraps an object inside another object that adds new behaviors or responsibilities at runtime, keeping the original object's interface intact.
+
+**Facade**
+
+The Facade Pattern is a structural design pattern that provides a simplified, unified interface to a complex subsystem or group of classes.
+
+It acts as a single entry point for clients to interact with the system, hiding the underlying complexity and making the system easier to use.
+
+**Composite**
+
+The Composite Pattern is a structural design pattern that allows you to compose objects into tree structures to represent part-whole hierarchies. It lets clients treat individual objects and compositions of objects uniformly.
+
+**Proxy**
+
+The Proxy Pattern is a structural design pattern that provides a surrogate or placeholder for another object to control access to it.
+
+A proxy acts as an intermediary that implements the same interface as the original object, allowing it to intercept and manage requests to the real object.
+
+**Bridge**
+
+The Bridge Pattern is a structural design pattern that is used to decouple an abstraction from its implementation so that the two can vary independently.

@@ -159,3 +159,38 @@ UML Notation: A dashed line with a filled triangle pointing to the interface.
 Dependency indicates that a class uses another class temporarily. Changes to the used class may affect the dependent class.
 Example: OrderService depends on PaymentService to process payments.
 UML Notation: A dashed line with an open arrow pointing to the class being used.
+
+**Creational Design Patterns**
+
+**Singleton**
+
+The Singleton Pattern ensures that a class has only one instance and provides a global point of access to that instance.
+
+In simpler terms:
+Imagine you're building an application where you only want one shared object throughout the lifecycle of the program. This is where Singleton comes into play — it restricts object creation and guarantees that all parts of your application use the same object.
+
+The Problem It Solves
+In a typical application, creating multiple objects of a class might not be problematic. However, in certain scenarios — like logging, configuration handling, or managing a database connection — you want just one instance to avoid redundancy, excessive memory use, or inconsistent behavior.
+
+**Factory**
+
+The Factory Pattern is a creational design pattern that provides an interface for creating objects but allows subclasses to alter the type of objects that will be created.
+
+In simpler terms:
+Rather than calling a constructor directly to create an object, we use a factory method to create that object based on some input or condition.
+
+When Should You Use It?
+We can use the Factory Pattern when:
+The client code needs to work with multiple types of objects.
+The decision of which class to instantiate must be made at runtime.
+The instantiation process is complex or needs to be controlled.
+
+**Builder**
+
+The Builder Pattern is a creational design pattern that separates the construction of a complex object from its representation. This allows you to create different types and representations of an object using the same construction process.
+
+Formal Definition:
+"Builder pattern builds a complex object step by step. It separates the construction of a complex object from its representation, so that the same construction process can create different representations."
+
+In simpler terms:
+Imagine you're ordering a custom burger. You choose the bun, patty, toppings, sauces, and whether you want it grilled or toasted. The chef follows your instructions step by step to build your custom burger. This is what the Builder Pattern does — it lets you construct complex objects by specifying their parts one at a time, giving you flexibility and control over the object creation process.

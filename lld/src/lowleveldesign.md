@@ -304,3 +304,20 @@ This pattern decouples the sender of a request from its receivers, giving multip
 The Visitor Pattern is a behavioral design pattern that lets you add new operations to existing class hierarchies without modifying the classes themselves. This is achieved by moving the logic of the operation into a separate class, known as the "visitor".
 
 The main advantage of the Visitor Pattern is that it allows you to decouple operations from the objects on which they operate, enabling you to add new operations without changing the classes that contain the objects. This promotes Open-Closed Principle (OCP), as new functionality can be added without modifying existing code.
+
+**Mediator**
+
+The Mediator Pattern is a behavioral design pattern that centralizes complex communication between objects into a single mediation object. It promotes loose coupling and organizes the interaction between components.
+
+Instead of objects communicating directly with each other, they interact through the mediator, which helps simplify and manage their communication.
+
+**Momento**
+
+The Memento Pattern is a behavioral design pattern that allows an object to capture its internal state and restore it later without violating encapsulation. It is especially useful when implementing features like undo/redo or rollback.
+
+Key Components
+This pattern defines three key components:
+
+Originator: The object whose internal state we want to save and restore.
+Memento: A storage object that holds the snapshot of the originator’s state.
+Caretaker: The object responsible for requesting the memento and keeping track of it. It neither modifies nor examines the contents of the memento.

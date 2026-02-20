@@ -321,3 +321,77 @@ This pattern defines three key components:
 Originator: The object whose internal state we want to save and restore.
 Memento: A storage object that holds the snapshot of the originator’s state.
 Caretaker: The object responsible for requesting the memento and keeping track of it. It neither modifies nor examines the contents of the memento.
+
+**LLD of parking lot**
+
+Step 1:
+
+    Functional Requirements:
+        
+        Entry flow:
+            1. Vehicles arrive at gate
+            2. Generate ticket and assign slot based on vehicle type
+            3. Mark slot as occupied
+            4. Return entry response 
+
+        Exit flow:
+            1. Present ticket
+            2. Calculate fee using pricing rules (flat vs hourly)
+            3. Process payment
+            4. Release slot
+            5. Return exit response with receipt
+
+        Admin Configurations:
+            1. Add/Edit/Delete floors and slots
+            2. Define/update pricing rules
+            3. View parking lot status
+
+    Edge cases:
+        Payment failure at exit
+        Lost ticket
+        System clock mismatch
+        Slot marked occupied wrongly
+
+Step 2:
+    
+    Identify core entities:
+        
+        Vehicle
+        ParkingSlot
+        Floor
+        Ticket
+        Receipt
+        PricingRule
+        Payment
+        
+    DTOs:
+        
+        EntryResult
+        ExitResult
+
+Step 3:
+
+    Discuss interaction flow
+
+    Entry flow:
+        Vehicle arrives
+        Slot allocated
+        Ticket generated
+        Slot marked as occupied
+
+    Exit Flow
+        Ticket scanned
+        Fee calculated
+        Payment processed (with retries)
+        Receipt generated
+        Slot released
+        Ticket deactivated
+
+    Admin Flow
+        Add floor
+        Add slot
+        Update pricing
+
+Step 4: 
+    
+    Defines Class Structures & Relationships

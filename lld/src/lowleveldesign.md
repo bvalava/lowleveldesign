@@ -395,3 +395,30 @@ Step 3:
 Step 4: 
     
     Defines Class Structures & Relationships
+
+Step 5:
+    
+    Core use cases and methods (Entry use-case, Exit use-case and Admin use-case)
+
+Step 6:
+
+    Design patterns used:
+        1. Adapter pattern - to integrate with different payment gateways(RazorPayy, stripe)
+        2. Repository Pattern - for data abstraction
+        3. Service layer pattern - for business logic extraction
+
+    OOPS principles used:
+        1. Interface segregation - Separate responsibilities by interface(PaymentGateway)
+        2. Dependency Inversion - Services dependent on interfaces, not concrete implementation
+        3. Single Responsibility - each class has one clear purpose
+        4. Open/closed - easy to extend with vehicle types, pricing strategies, payment types
+        5. Encapsulation - Domain objects encapsulate their data and behavior.
+
+Step 7:
+
+    Edge cases:
+        1. Exit without ticket - Admin can override
+        2. Payment failed - PaymentGatewayAdapter returns boolean and handle it using cash(maybe)
+        3. Vehicle Type mismatch - verify at entry and exit through slotservice
+        4. Time mismatch - use system clock consistently across all services
+        4. Slot inconsistency - run periodic reconciliation service

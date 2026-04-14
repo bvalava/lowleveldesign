@@ -422,3 +422,246 @@ Step 7:
         3. Vehicle Type mismatch - verify at entry and exit through slotservice
         4. Time mismatch - use system clock consistently across all services
         4. Slot inconsistency - run periodic reconciliation service
+
+**LLD of logging framework**
+
+Step 1:
+
+    Functional requirements:
+    
+        Log levels with Priority System
+            1. Support 5 logging levles: DEBUG, INFO, WARNING, ERROR, FATAL.
+            2. Each level has prioerity (DEBUG = 1, INFO = 2, WARNING = 3, ERROR = 4, FATAL = 5)
+            3. Only log messages wit priority >= configured level
+
+        Log message structure
+            1. Each log message contains: timestamp, level, message text and optimal source
+
+        Multiple Output Destinations
+            1. DIsplay logs in terminal/console(develop)
+            2. Save logs to a file(production)
+
+        Configuration System
+            1. Set logging level for entire application
+            2. Choose which output destinations to use
+            3. Configure formatting rules
+            4. Simple configuration without complex filtering
+        
+        Thread Safety:
+            Multiple threads can log simultaneously without data corruption
+            No lost or mixed-up log messages
+            Thread-safe operations for all logging components
+
+        Extensibility:
+            Easy to add new output destinations (email, network, cloud storage)
+            Easy to add new log levels if needed
+            Easy to add custom formatting
+
+        Message Formatting:
+            Customize how log messages appear in output
+            Control timestamp format, level display, and message layout
+            Different formats for different destinations
+
+    Non-Functional Requirements
+        Thread Safety: Handle concurrent logging without data corruption
+        Performance: Minimal overhead for logging operations
+        Extensibility: Easy to add new log levels and destinations
+        Configurability: Runtime configuration changes
+        Memory Efficiency: Reasonable memory usage
+
+    Edge Cases to Consider
+        Multiple threads logging simultaneously (writing in same lines)
+        Invalid log levels or configurations
+        File system full during file logging
+        Database connection failure during database logging
+
+Step 2:
+
+    Identify Core entitities:
+
+        LogLevel
+            Enum: DEBUG, INFO, WARNING, ERROR, FATAL
+            priority: int (for comparison)
+            isGreaterOrEqual(LogLevel other): boolean
+        
+        LogMessage
+            timestamp: Timestamp
+            level: LogLevel
+            message: String
+            source: String (optional - class/method name)
+
+        LogConfiguration
+            A simple configuration for the logging framework.
+            rootLevel: LogLevel
+
+Step 3:
+    
+    Visualize Interaction Flows:
+
+        Basic Logging Flow
+            Application creates log message
+            Logger processes message
+            If message passes level check, Logger sends to output destinations
+            Each destination writes the message
+
+        Configuration Flow (Real-time)
+            Application sets LogConfiguration
+            Logger updates its settings
+            All future logs follow new configuration
+
+        Multi-threaded Flow
+            Multiple threads create log messages simultaneously
+            Thread-safe Logger processes each request
+            Each destination handles concurrent writes safely
+
+        Formatting Flow
+            LogMessage reaches destination
+            Destination formats message
+            Formatted message is written to output
+
+Step 4:
+
+    Define Class Structures and Relationships:
+
+        1. Core Interfaces (Fundamental Classes and Interfaces)
+
+            1.1 Logger
+                void debug(String message)
+                void info(String message)
+                void warning(String message)
+                void error(String message)
+                void fatal(String message)
+                void log(LogLevel level, String message)
+                void setLevel(LogLevel level)
+                void addAppender(LogAppender appender)
+                void addFilter(LogFilter filter)
+                void removeFilter(LogFilter filter)
+                List<LogAppender> getAppenders()
+                List<LogFilter> getFilters()
+
+            1.2 LogAppender
+                void append(LogMessage message)
+                void setLevel(LogLevel level)
+                LogLevel getLevel()
+                boolean isEnabled(LogLevel level)
+                void setFormatter(LogFormatter formatter)
+                LogFormatter getFormatter()
+
+            1.3 LogFormatter
+                String format(LogMessage message)
+                void setPattern(String pattern)
+                String getPattern()
+                void setDateFormat(String dateFormat)
+
+            1.4 LogFilter
+                boolean shouldLog(LogMessage message)
+                void setLevel(LogLevel level)
+                LogLevel getLevel()
+
+            1.5 LogConfiguration
+                void setRootLevel(LogLevel level)
+                LogLevel getRootLevel()
+
+        2. Implementation Classes
+
+            ConsoleAppender implements LogAppender
+                Writes to System.out/System.err based on level
+                Uses formatter to format messages before output
+
+            FileAppender implements LogAppender
+                Writes to specified file with timestamp
+                Uses formatter to format messages before writing
+
+            DatabaseAppender implements LogAppender
+                Writes to database table
+                Uses formatter to format messages before storage
+
+            SimpleFormatter implements LogFormatter
+                Default format: "[LEVEL] TIMESTAMP - MESSAGE"
+                Configurable date format and pattern
+
+            DetailedFormatter implements LogFormatter
+                Extended format: "[LEVEL] TIMESTAMP [SOURCE] - MESSAGE"
+                Includes source information when available
+
+            LevelFilter implements LogFilter
+                Filters messages based on minimum log level
+                Only allows messages with level ≥ configured level
+
+            SourceFilter implements LogFilter
+                Filters messages based on source/class name
+                Can include or exclude specific packages/classes
+
+        3. Core Classes
+
+            LogLevel
+                Enum with priority values
+                isGreaterOrEqual(LogLevel other) method
+
+            LogMessage
+                Immutable data class
+                Builder pattern for construction   
+
+Step 5: 
+
+    Core use cases and methods (Basic Logging Use Case, Configuration Use Case, Multi-threaded Use Case, Filtering Use Case, Formatting Use Case)
+
+Step 6:
+
+    OOP Principles & Design Patterns
+
+        Design Patterns Used
+            Strategy Pattern – Used for different appenders (Console, File, Database) and formatters (Simple, Detailed)
+            Chain of Responsibility Pattern – Implemented in the filter chain processing
+            Builder Pattern – Used for constructing LogMessage objects
+
+        OOP Principles Applied
+            Single Responsibility – Each class has one clear and distinct purpose
+            Open/Closed Principle – Easy to add new appenders without modifying existing code
+            Liskov Substitution – All appenders are interchangeable without breaking functionality
+            Interface Segregation – Clean LogAppender interface with only required methods
+            Dependency Inversion – Depend on LogAppender interface, not specific implementations
+            Encapsulation – Internal state is protected with clear public APIs
+
+        SOLID Principles
+            Single Responsibility – Logger handles logging, Appenders handle output, Formatters handle formatting, Filters handle filtering
+            Open/Closed – New appenders, formatters, and filters can be added without changing existing code
+            Liskov Substitution – Any LogAppender, LogFormatter, or LogFilter can replace another
+            Interface Segregation – Each interface only has the methods necessary for its responsibility
+            Dependency Inversion – Logger depends on interfaces (LogAppender, LogFormatter, LogFilter) instead of concrete classes
+        
+Step 7:
+
+    Handle Edge Cases:
+
+        Edge Case Solutions
+            Multiple Threads Logging:
+                Use synchronized methods or concurrent collections (e.g., ConcurrentLinkedQueue)
+                Implement thread-safe appender implementations
+                Use atomic operations for shared state (AtomicInteger, AtomicLong)
+
+            Invalid Log Levels:
+                Validate inputs in the LogLevel enum (parse safely)
+                Default to ERROR level for invalid inputs
+                Return clear error messages or throw well-documented exceptions
+
+            File System Full:
+                Wrap file operations in try-catch blocks
+                Fallback to console logging or an in-memory buffer
+                Emit alerts or escalate errors to monitoring systems
+
+            Database Connection Failure:
+                Use connection pooling and retry logic with backoff
+                Gracefully fallback to file or console logging
+                Persist failed log writes in a retry queue for later flush
+
+            Invalid Format Patterns:
+                Validate format patterns in formatter implementations
+                Fallback to a safe/simple format when pattern is invalid
+                Return clear error messages describing pattern syntax issues
+
+            Filter Configuration Errors:
+                Validate filter parameters at registration time
+                Default to accept-all behavior for invalid filters (fail-open)
+                Handle filter exceptions gracefully so logging isn't disrupted        
+    

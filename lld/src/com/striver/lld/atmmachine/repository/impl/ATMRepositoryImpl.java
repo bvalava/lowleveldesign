@@ -1,0 +1,40 @@
+package com.striver.lld.atmmachine.repository.impl;
+
+import com.striver.lld.atmmachine.domain.ATM;
+import com.striver.lld.atmmachine.domain.state.ATMState;
+import com.striver.lld.atmmachine.repository.ATMRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ATMRepositoryImpl implements ATMRepository {
+
+    private Map<String, ATM> atmStore = new ConcurrentHashMap<>();
+
+    @Override
+    public ATM save(ATM atm) {
+        atmStore.put(atm.getId(), atm);
+        return atm;
+    }
+
+    @Override
+    public Optional<ATM> findById(String atmId) {
+        return Optional.ofNullable(atmStore.get(atmId));
+    }
+
+    @Override
+    public List<ATM> findAll() {
+        return new ArrayList<>(atmStore.values());
+    }
+
+    @Override
+    public void updateATMState(String atmId, ATMState state) {
+        Optional<ATM> atmOpt = findById(atmId);
+        if (atmOpt.isPresent()) {
+            atmOpt.get().setCurrentState(state);
+        }
+    }
+}
